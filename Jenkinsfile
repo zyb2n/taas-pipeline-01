@@ -1,5 +1,3 @@
-pipeline {
-
 @NonCPS
 def loop_of_sh(list) {
     list.each { item ->
@@ -10,6 +8,7 @@ def loop_of_sh(list) {
 
 hosts = ['10.2.1.234', '10.2.6.149', '10.2.4.27']
 
+pipeline {
   agent {
     kubernetes {
       label 'taaspod'
