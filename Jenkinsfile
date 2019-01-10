@@ -16,11 +16,6 @@ spec:
     command:
     - cat
     tty: true
-  - name: busybox
-    image: busybox
-    command:
-    - cat
-    tty: true
 """
     }
   }
@@ -29,6 +24,9 @@ spec:
       steps {
         container('taas') {
           sh 'inspec version'
+  sshagent (credentials: ['ssh-kenzan-scratch']) {
+    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 10.2.1.234 uname -a'
+  }
         }
       }
     }
