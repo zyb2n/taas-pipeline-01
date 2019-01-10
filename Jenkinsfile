@@ -21,7 +21,7 @@ metadata:
 spec:
   containers:
   - name: taas
-    image: zyb2n/taastest:1.4
+    image: zyb2n/taastest:1.5
     command:
     - cat
     tty: true
