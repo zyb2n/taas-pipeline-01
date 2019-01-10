@@ -34,7 +34,7 @@ spec:
       }
    post {
   always {
-    junit "$BUILD_NUMBR/junitreport/*.xml"
+    junit "$BUILD_NUMBER/junitreport/*.xml"
   }
 
     }
