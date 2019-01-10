@@ -23,10 +23,10 @@ spec:
     stage('Create build output') {
       steps {
         container('taas') {
-          sh 'inspec version'
-  sshagent (credentials: ['ssh-kenzan-scratch']) {
-    sh 'ssh -o StrictHostKeyChecking=no -l ec2-user 10.2.1.234 uname -a'
-  }
+          sshagent (credentials: ['ssh-kenzan-scratch']) {
+            sh 'inspec version'
+            sh 'ssh -o StrictHostKeyChecking=no ec2-user@10.2.1.234 uname -a'
+         }
         }
       }
     }
