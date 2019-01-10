@@ -30,9 +30,6 @@ spec:
         container('taas') {
           sh 'inspec version'
         }
-        container('busybox') {
-          sh '/bin/busybox'
-        }
       }
     }
   }
