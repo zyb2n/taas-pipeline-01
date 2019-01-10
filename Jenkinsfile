@@ -20,7 +20,7 @@ spec:
     }
   }
   stages {
-    stage('Create build output') {
+    stage('build') {
       steps {
         container('taas') {
           sshagent (credentials: ['ssh-kenzan-scratch']) {
@@ -34,10 +34,13 @@ spec:
         }
       }
     }
+
+stage('post') {
    post {
   always {
     junit "$BUILD_NUMBR/junitreport/*.xml"
   }
+}
 }
   }
 }
