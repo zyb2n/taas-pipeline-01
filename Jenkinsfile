@@ -25,13 +25,12 @@ spec:
     }
   }
   stages {
-    stage('check inspec') {
+    stage('Create build output') {
       steps {
         container('taas') {
           sh 'inspec version'
         }
         container('busybox') {
-          sh 'hostname -i',
           sh '/bin/busybox'
         }
       }
