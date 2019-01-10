@@ -25,9 +25,8 @@ spec:
         container('taas') {
           sshagent (credentials: ['ssh-kenzan-scratch']) {
             sh 'inspec version'
-            sh 'ssh -o StrictHostKeyChecking=no ec2-user@10.2.1.234 uname -a'
 	    sh 'git clone https://github.com/zyb2n/taas-pipeline-01.git /tmp/taas-pipeline-01'
-            sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@10.2.1.234 --reporter cli json:$BUILD_NUMBER/json/10.2.1.234.output.json junit:$BUILD_NUMBER/junitreport/10.2.1.234.junit.xml html:$BUILD_NUMBER/www/10.2.1.234.index.html || true"
+            sh "for host in '10.2.1.234 10.2.6.149 10.2.4.27'; do inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@${host} --reporter cli json:$BUILD_NUMBER/json/${host}.output.json junit:$BUILD_NUMBER/junitreport/${host}.junit.xml html:$BUILD_NUMBER/www/${host}.index.html || true; done"
          }
 	archiveArtifacts artifacts: '$BUILD_NUMBER/*/*', fingerprint: true
         }
