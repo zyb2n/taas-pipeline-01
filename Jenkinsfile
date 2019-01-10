@@ -14,7 +14,7 @@ spec:
   - name: taas
     image: zyb2n/taastest:latest
     command:
-    - sleep infinity
+    - cat
     tty: true
 """
     }
