@@ -21,8 +21,8 @@ spec:
   }
   stages {
     stage('Create build output') {
-	    git url: 'https://https://github.com/zyb2n/taas-pipeline-01'
       steps {
+	    git url: 'https://https://github.com/zyb2n/taas-pipeline-01'
         container('taas') {
         
           sshagent (credentials: ['ssh-kenzan-scratch']) {
