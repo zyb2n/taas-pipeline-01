@@ -33,14 +33,13 @@ spec:
 	archiveArtifacts artifacts: '$BUILD_NUMBER/*/*', fingerprint: true
         }
       }
-    }
-
-stage('post') {
    post {
   always {
     junit "$BUILD_NUMBR/junitreport/*.xml"
   }
-}
+
+    }
+
 }
   }
 }
