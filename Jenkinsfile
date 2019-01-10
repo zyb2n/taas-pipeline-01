@@ -27,7 +27,7 @@ spec:
             sh 'inspec version'
             sh 'ssh -o StrictHostKeyChecking=no ec2-user@10.2.1.234 uname -a'
 	    sh 'git clone https://github.com/zyb2n/taas-pipeline-01.git /tmp/taas-pipeline-01'
-            sh "/usr/local/bin/inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@10.2.1.234 || true"
+            sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@10.2.1.234 || true"
          }
         }
       }
