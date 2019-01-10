@@ -1,6 +1,7 @@
 def loop_of_sh(list) {
     for (int i = 0; i < list.size(); i++) {
         sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@${list[i]} --reporter cli json:$BUILD_NUMBER/json/${list[i]}.output.json junit:$BUILD_NUMBER/junitreport/${list[i]}.junit.xml html:$BUILD_NUMBER/www/${list[i]}.index.html || true"
+        sh "/es_loader.sh $BUILD_NUMBER/json/${list[i]}.output.json"
     }
 }
 
@@ -20,7 +21,7 @@ metadata:
 spec:
   containers:
   - name: taas
-    image: zyb2n/taastest:1.1
+    image: zyb2n/taastest:1.2
     command:
     - cat
     tty: true
