@@ -21,14 +21,14 @@ spec:
   }
   stages {
     stage('Create build output') {
+	    git url: 'https://https://github.com/zyb2n/taas-pipeline-01'
       steps {
         container('taas') {
         
           sshagent (credentials: ['ssh-kenzan-scratch']) {
             sh 'inspec version'
-	    sh 'git clone https://https://github.com/zyb2n/taas-pipeline-01.git /tmp/'
             sh 'ssh -o StrictHostKeyChecking=no ec2-user@10.2.1.234 uname -a'
-            sh "/usr/local/bin/inspec exec /tmp/ec2-linux/controls/ -t ssh://ec2-user@10.2.1.234 || true"
+//            sh "/usr/local/bin/inspec exec /tmp/ec2-linux/controls/ -t ssh://ec2-user@10.2.1.234 || true"
          }
         }
       }
