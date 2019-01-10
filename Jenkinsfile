@@ -26,7 +26,7 @@ spec:
         
           sshagent (credentials: ['ssh-kenzan-scratch']) {
             sh 'inspec version'
-	    sh 'git clone 'https://https://github.com/zyb2n/taas-pipeline-01.git /tmp/'
+	    sh 'git clone https://https://github.com/zyb2n/taas-pipeline-01.git /tmp/'
             sh 'ssh -o StrictHostKeyChecking=no ec2-user@10.2.1.234 uname -a'
             sh "/usr/local/bin/inspec exec /tmp/ec2-linux/controls/ -t ssh://ec2-user@10.2.1.234 || true"
          }
