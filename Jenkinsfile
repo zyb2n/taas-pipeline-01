@@ -1,18 +1,18 @@
 pipeline {
   agent {
     kubernetes {
-      label 'taaspod'
+      label 'mypod'
       defaultContainer 'jnlp'
       yaml """
 apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    app: taas-jenkins-slave
+    some-label: some-label-value
 spec:
   containers:
-  - name: taas
-    image: zyb2n/taastest:latest
+  - name: maven
+    image: maven:alpine
     command:
     - cat
     tty: true
@@ -25,10 +25,10 @@ spec:
     }
   }
   stages {
-    stage('Create build output') {
+    stage('Run maven') {
       steps {
-        container('taas') {
-          sh 'inspec version'
+        container('maven') {
+          sh 'mvn -version'
         }
         container('busybox') {
           sh '/bin/busybox'
