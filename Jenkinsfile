@@ -1,5 +1,15 @@
 pipeline {
+
+@NonCPS
+def loop_of_sh(list) {
+    list.each { item ->
+        sh "echo Host: ${item}"
+        sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@${item} --reporter cli json:$BUILD_NUMBER/json/${item}.output.json junit:$BUILD_NUMBER/junitreport/${item}.junit.xml html:$BUILD_NUMBER/www/${item}.index.html || true"
+    }
+}
+
 hosts = ['10.2.1.234', '10.2.6.149', '10.2.4.27']
+
   agent {
     kubernetes {
       label 'taaspod'
@@ -42,11 +52,4 @@ spec:
 }
   }
 
-@NonCPS
-def loop_of_sh(list) {
-    list.each { item ->
-        sh "echo Host: ${item}"
-        sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@${item} --reporter cli json:$BUILD_NUMBER/json/${item}.output.json junit:$BUILD_NUMBER/junitreport/${item}.junit.xml html:$BUILD_NUMBER/www/${item}.index.html || true"
-    }
-}
 }
