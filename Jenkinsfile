@@ -45,7 +45,7 @@ spec:
             keepAll: true,
             reportDir: '$BUILD_NUMBER/www',
             reportFiles: '*.index.html',
-            reportName: 'InSpect Report'
+            reportName: 'TaaS Report'
           ]
         }
       }
