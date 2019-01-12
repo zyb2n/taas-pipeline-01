@@ -37,6 +37,10 @@ spec:
 	    sh 'git clone https://github.com/zyb2n/taas-pipeline-01.git /tmp/taas-pipeline-01'
 	    loop_of_sh(hosts)
          }
+        }
+      }
+   post {
+  always {
 	archiveArtifacts artifacts: '$BUILD_NUMBER/*/*', fingerprint: true
         // publish html
         publishHTML target: [
@@ -45,13 +49,9 @@ spec:
             keepAll: true,
             reportDir: '$BUILD_NUMBER/www',
             reportFiles: '*.index.html',
-            reportName: 'TaaS Report'
+            reportName: 'TaaS HTML Report'
           ]
-        }
-      }
-   post {
-  always {
-    junit "$BUILD_NUMBER/junitreport/*.xml"
+        junit "$BUILD_NUMBER/junitreport/*.xml"
   }
 
     }
