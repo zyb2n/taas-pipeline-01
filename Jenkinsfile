@@ -38,6 +38,15 @@ spec:
 	    loop_of_sh(hosts)
          }
 	archiveArtifacts artifacts: '$BUILD_NUMBER/*/*', fingerprint: true
+        // publish html
+        publishHTML target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: 'coverage',
+            reportFiles: '$BUILD_NUMBER/www/*.index.html',
+            reportName: 'InSpect Report'
+          ]
         }
       }
    post {
