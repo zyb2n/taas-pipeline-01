@@ -43,8 +43,8 @@ spec:
             allowMissing: false,
             alwaysLinkToLastBuild: false,
             keepAll: true,
-            reportDir: 'coverage',
-            reportFiles: '$BUILD_NUMBER/www/*.index.html',
+            reportDir: '$BUILD_NUMBER/www',
+            reportFiles: '*.index.html',
             reportName: 'InSpect Report'
           ]
         }
