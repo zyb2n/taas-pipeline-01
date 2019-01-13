@@ -1,6 +1,6 @@
-def loop_of_sh(list,string) {
+def loop_of_sh(list) {
     for (int i = 0; i < list.size(); i++) {
-        sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://${string}@${list[i]} --reporter cli json:$BUILD_NUMBER/json/${list[i]}.output.json junit:$BUILD_NUMBER/junitreport/${list[i]}.junit.xml html:$BUILD_NUMBER/www/${list[i]}.index.html || true"
+        sh "inspec exec /tmp/taas-pipeline-01/ec2-linux/controls/ -t ssh://ec2-user@${list[i]} --reporter cli json:$BUILD_NUMBER/json/${list[i]}.output.json junit:$BUILD_NUMBER/junitreport/${list[i]}.junit.xml html:$BUILD_NUMBER/www/${list[i]}.index.html || true"
         sh "/es_loader.sh store-elasticsearch-client $BUILD_NUMBER/json/${list[i]}.output.json"
     }
 }
@@ -28,9 +28,6 @@ spec:
 """
     }
   }
-    parameters {
-        string(name: 'ssh-user', defaultValue: 'ec2-user', description: 'SSH Username')
-    }
   stages {
     stage('build') {
       steps {
@@ -38,7 +35,7 @@ spec:
           sshagent (credentials: ['taas-ssh']) {
             sh 'inspec version'
 	    sh 'git clone https://github.com/zyb2n/taas-pipeline-01.git /tmp/taas-pipeline-01'
-	    loop_of_sh(target,"${params.ssh-user}")
+	    loop_of_sh(target)
          }
         }
       }
