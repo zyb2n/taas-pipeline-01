@@ -5,8 +5,6 @@ def loop_of_sh(list) {
     }
 }
 
-hosts = ['10.2.6.149', '10.2.4.27']
-
 pipeline {
   agent {
     kubernetes {
@@ -28,6 +26,9 @@ spec:
 """
     }
   }
+    parameters {
+        string(name: 'Target', defaultValue: "['10.2.6.149','10.2.4.27']", description: 'Target List')
+    }
   stages {
     stage('build') {
       steps {
@@ -35,7 +36,7 @@ spec:
           sshagent (credentials: ['taas-ssh']) {
             sh 'inspec version'
 	    sh 'git clone https://github.com/zyb2n/taas-pipeline-01.git /tmp/taas-pipeline-01'
-	    loop_of_sh(hosts)
+	    loop_of_sh(${params.Target})
          }
         }
       }
