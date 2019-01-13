@@ -27,7 +27,7 @@ spec:
     }
   }
     parameters {
-        string(name: 'Target', defaultValue: "['10.2.6.149','10.2.4.27']", description: 'Target List')
+        string(name: 'Target', defaultValue: "'10.2.6.149','10.2.4.27'", description: 'Target List')
     }
   stages {
     stage('build') {
