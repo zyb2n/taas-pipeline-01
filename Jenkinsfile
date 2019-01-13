@@ -36,7 +36,7 @@ spec:
           sshagent (credentials: ['taas-ssh']) {
             sh 'inspec version'
 	    sh 'git clone https://github.com/zyb2n/taas-pipeline-01.git /tmp/taas-pipeline-01'
-	    loop_of_sh(${params.Target})
+	    loop_of_sh("${params.Target}")
          }
         }
       }
